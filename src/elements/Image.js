@@ -1,20 +1,19 @@
 import React from "react";
-import styled from "styled-components"; // 1)
+import styled from "styled-components";
 
-const Image = props => {                // 2)
+const Image = props => {
+  const { shape, src, size } = props;
 
-  const { shape, src, size } = props;   // 4)
-
-  const styles = {                      // 5)
+  const styles = {
     src: src,
     size: size,
   };
 
-  if (shape === "circle") {             // 8) shape 에 따라서 스타일을 다르게 적용해서 return 시켜준다!!!!!
+  if (shape === "circle") {
     return <ImageCircle {...styles}></ImageCircle>;
   }
 
-  if (shape === "rectangle") {          // 8) shape 에 따라서 스타일을 다르게 적용해서 return 시켜준다!!!!!
+  if (shape === "rectangle") {
     return (
       <AspectOutter>
         <AspectInner {...styles}></AspectInner>
@@ -28,12 +27,12 @@ const Image = props => {                // 2)
 Image.defaultProps = {
   // 3)
   shape: "circle",
-  src: "https://i.pinimg.com/564x/25/e4/26/25e426c902678dcce496bb021fdee62c.jpg",
+  src: "https://i.pinimg.com/564x/02/46/9e/02469ead56909f6098e24397a86da976.jpg",
   size: 36,
 };
 
-const AspectOutter = styled.div`   // 6) "AspectOutter와 AspectInner은 반응형 이미지를 맞추기 위해 div를 두겹으로 배치하여 속성을 따로 주었다."
-  width: 100%;                       /*  "Aspect은 콘텐츠의 큰 이미지가 들어 가는 영역을 미리 css 스타일을 잡아주는거다."  */
+const AspectOutter = styled.div`
+  width: 100%;
   min-width: 250px;
 `;
 const AspectInner = styled.div`
@@ -43,7 +42,7 @@ const AspectInner = styled.div`
   background-image: url("${props => props.src}");
   background-size: cover;
 `;
-const ImageCircle = styled.div`   // 7) 이 ImageCircle은 user의 이미지가 들어가는 스타일을 미리 잡아주는거다.
+const ImageCircle = styled.div`
   --size: ${props => props.size}px;
   width: var(--size);
   height: var(--size);
