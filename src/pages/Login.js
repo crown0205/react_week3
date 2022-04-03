@@ -1,15 +1,16 @@
 import React from "react";
+import { setCookie } from "../shared/Cookie";
+import { actionCreators as userActions } from "../redux/modules/user";
+
+import { useDispatch } from "react-redux";
+
 import { Text, Grid, Button, Input } from "../elements/index";
 
-import { setCookie } from "../shared/Cookie";
-
 const Login = props => {
-
-  // console.log(getCookie("user_id"))
+  const dispatch = useDispatch();
 
   const login = () => {
-    setCookie("user_id", "gogosing",3)
-    setCookie("user_pwd", "password", 3)
+    dispatch(userActions.loginAction({ user_name: "raraland" }));
   }
 
   return (
