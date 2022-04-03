@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = props => {
-  const { children, bold, color, size } = props;
+  const { children, bold, color, size, _onClick } = props;
 
   const styles = {
     bold: bold,
@@ -10,7 +10,7 @@ const Text = props => {
     size: size,
   };
 
-  return <P {...styles}>{children}</P>;
+  return <P {...styles} onClick={_onClick}>{children}</P>;
 };
 
 Text.defaultProps = {
