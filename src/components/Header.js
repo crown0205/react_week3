@@ -3,13 +3,15 @@ import { Grid, Text, Button } from "../elements/index";
 
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
-import { getCookie, deleteCookie } from "../shared/Cookie";
+import { actionCreators as userActions } from "../redux/modules/user";
 
 const Header = props => {
   const history = useHistory();
   const dispatch = useDispatch();
   const is_login = useSelector(state => state.user.is_login);
+
+  console.log(useSelector(state => state))
+  // 리덕스에 있는 정보 변경(없애)해줌.
 
   if (is_login) {
     return (
@@ -38,7 +40,7 @@ const Header = props => {
             fontW="600"
             text="로그아웃"
             _onClick={() => {
-              deleteCookie("user_id");
+              dispatch(userActions.logOut({}))
               history.push("/login");
             }}
           />
