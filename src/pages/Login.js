@@ -1,11 +1,11 @@
 import React from "react";
 import { Text, Grid, Button, Input } from "../elements/index";
 
-import { getCookie, setCookie, deleteCookie } from "../shared/Cookie";
+import { setCookie } from "../shared/Cookie";
 
 const Login = props => {
 
-  console.log(getCookie("user_id"))
+  // console.log(getCookie("user_id"))
 
   const login = () => {
     setCookie("user_id", "gogosing",3)

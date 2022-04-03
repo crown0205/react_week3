@@ -17,7 +17,7 @@ const Post = (props) => {
           <Image shape="rectangle" src={props.image_url}/>
         </Grid>
         
-        <Grid padding="16px">
+        <Grid padding="16px 16px 0">
           <Text>{props.contents}</Text>
         </Grid>
 
@@ -34,13 +34,14 @@ const Post = (props) => {
   )
 }
 
+
 Post.defaultProps = {
   user_info: {
     user_name: "BaoBab",
     user_profile:"https://i.pinimg.com/564x/ee/50/57/ee505776528eb9a40f8cf55b03df978f.jpg",
   },
-  image_url: "https://i.pinimg.com/564x/d0/9d/ef/d09def56a001edcbccb9cf35d5a6d599.jpg",
-  contents: "내가 그린그림 잘 그린기린그림",
+  image_url: "https://i.pinimg.com/736x/4a/c2/95/4ac2952bad5617be9755ff25483f3d81.jpg",
+  contents: "json provides metadata used when your web app is installed on a'users mobile device or desktop.",
   comment_cnt: 10,
   insert_dt: "2022-03-09 11:32:00"
 }
