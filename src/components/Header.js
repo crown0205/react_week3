@@ -8,16 +8,8 @@ import { getCookie, deleteCookie } from "../shared/Cookie";
 
 const Header = props => {
   const history = useHistory();
-  const dispatch = useDispatch()
-  const is_login =useSelector((state)=> state.user.is_login)
-
-  console.log("header")
-  console.log("is_login : ",is_login)
-  console.log("is_login : ",useSelector((state)=>state))
-  // 로그인 버튼 클릭시에 리듀서에서 쿠키를 생성하고, state값을 draft가 복사해서 그값을 변경후 리덕스로 보내준듯.
-  // 그래서 header에서 리덕스의 값을 가지고, header 파트를 로그인전과 후로 나눠서 출력해줌.
-  // is_login <== true 값을 가지고 있음.
-
+  const dispatch = useDispatch();
+  const is_login = useSelector(state => state.user.is_login);
 
   if (is_login) {
     return (
