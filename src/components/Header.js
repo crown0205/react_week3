@@ -12,10 +12,10 @@ const Header = props => {
         </Grid>
 
         <Grid is_flex>
-          <Button margin="0px 0px 0px 10px" fontW="600">
+          <Button margin="0px 10px 0px">
             Signup
           </Button>
-          <Button fontW="600">Login</Button>
+          <Button>Login</Button>
         </Grid>
       </Grid>
     </React.Fragment>

@@ -13,12 +13,14 @@ const Post = (props) => {
           <Text>{props.insert_dt}</Text>
         </Grid>
 
+        <Grid margin="16px 0 0">
+          <Image shape="rectangle" src={props.image_url}/>
+        </Grid>
+        
         <Grid padding="16px">
           <Text>{props.contents}</Text>
         </Grid>
-        <Grid>
-          <Image shape="rectangle" src={props.image_url}/>
-        </Grid>
+
         <Grid padding="16px">
           <Text bold>댓글 {props.comment_cnt}개</Text>
           {/* 아이콘 들어갈 자리 ❤️ */}
