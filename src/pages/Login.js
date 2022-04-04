@@ -8,8 +8,15 @@ import { Text, Grid, Button, Input } from "../elements/index";
 const Login = props => {
   const dispatch = useDispatch();
 
+  const [id, setId] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
+
   const login = () => {
-    dispatch(userActions.loginAction({ user_name: "raraland" }));
+    if (id === "" || pwd === "") {
+      window.alert("입력란이 비어있습니다.");
+      return;
+    }
+    dispatch(userActions.loginFB(id, pwd));
   };
 
   return (
@@ -24,7 +31,7 @@ const Login = props => {
             placeholder="아이디를 입력해주세요."
             height="40px"
             _onChange={e => {
-              // setId(e.target.value);
+              setId(e.target.value);
             }}
           />
         </Grid>
@@ -35,7 +42,7 @@ const Login = props => {
             placeholder="패스워드 입력해주세요."
             height="40px"
             _onChange={e => {
-              // setPwd(e.target.value);
+              setPwd(e.target.value);
             }}
           />
         </Grid>

@@ -21,26 +21,44 @@ const initialState = {
 };
 
 //middleware actions
-const loginAction = user => {
+const loginFB = (id, pwd) => {
   return function (dispatch, getState, { history }) {
-    dispatch(setUser(user));
-    history.push("/");
+    auth
+      .signInWithEmailAndPassword(id, pwd) // firebase에서 id, pwd 조회해서 정보 가져옴.
+      .then(user => {
+        console.log("loginFB : ", user);
+
+        dispatch(
+          setUser({
+            // 가져온 정보 리듀서로 보내 정보 저장하고 쿠키 발행, is_login ==> true로 변경
+            user_name: user.user.displayName,
+            id: id,
+            user_profile: "",
+          })
+        );
+
+        history.push("/");
+      })
+      .catch(error => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+
+        console.log(errorCode, errorMessage);
+      });
   };
 };
 
 const signupFB = (id, pwd, user_name) => {
   return function (dispatch, getState, { history }) {
     auth
-      .createUserWithEmailAndPassword(id, pwd) // firebase에 id,pwd를 생성.
+      .createUserWithEmailAndPassword(id, pwd)
       .then(user => {
         auth.currentUser
           .updateProfile({
-            // 닉네임을 새로 업데이트 시켜줌.
             displayName: user_name,
           })
 
           .then(() => {
-            // 리덕스에 setUser 유저 생성데이터를 넣어줌.
             dispatch(
               setUser({ user_name: user_name, id: id, user_profile: "" })
             );
@@ -63,10 +81,7 @@ const signupFB = (id, pwd, user_name) => {
 // reducer
 export default handleActions(
   {
-    [SET_USER]: (
-      state,
-      action // LOG_IN 기능은 이제 미들웨어에서 사용하여, SET_USER로 변경
-    ) =>
+    [SET_USER]: (state, action) =>
       produce(state, draft => {
         setCookie("is_login", "success");
 
@@ -88,10 +103,10 @@ export default handleActions(
 
 //action creator export 액션생성함수를 export해줘야 다른곳에서 가져다 쓸수 있어서 해주는거다.
 const actionCreators = {
+  loginFB,
   signupFB,
   logOut,
   getUser,
-  loginAction,
 };
 
 export { actionCreators };
