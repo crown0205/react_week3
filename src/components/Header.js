@@ -46,7 +46,7 @@ const Header = props => {
             fontW="600"
             text="로그아웃"
             _onClick={() => {
-              dispatch(userActions.logOut({}));
+              dispatch(userActions.logOutFB());
               history.push("/login");
             }}
           />

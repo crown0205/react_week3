@@ -25,7 +25,6 @@ const initialState = {
 const loginFB = (id, pwd) => {
   return function (dispatch, getState, { history }) {
     auth.setPersistence(firebase.auth.Auth.Persistence.SESSION).then(res => {
-      // sesstion 스토리지로 key와 유저 정보 저장하기.
       auth
         .signInWithEmailAndPassword(id, pwd)
         .then(user => {
@@ -108,6 +107,16 @@ const loginCheckFB = () => {
   };
 };
 
+const logOutFB = () => {
+  return function (dispatch, getState, { history }) {
+    auth.signOut().then(() => {
+      // 세션 스토리지에서 firebase key를 삭제 한다.
+      dispatch(logOut());
+      history.push("/");
+    });
+  };
+};
+
 // reducer
 export default handleActions(
   {
@@ -121,7 +130,7 @@ export default handleActions(
 
     [LOG_OUT]: (state, action) =>
       produce(state, draft => {
-        deleteCookie("is_login");
+        deleteCookie("is_login"); // 쿠키를 삭제 해주는데, 값만 삭제해주고, 이름은 그대로 남아있는듯 하다.
 
         draft.user = null;
         draft.is_login = false;
@@ -137,6 +146,7 @@ const actionCreators = {
   loginFB,
   signupFB,
   logOut,
+  logOutFB,
   getUser,
 };
 
