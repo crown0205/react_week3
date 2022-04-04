@@ -1,9 +1,12 @@
 import "./App.css";
 import React from "react";
 import { Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
 import { ConnectedRouter } from "connected-react-router";
+import { actionCreators as userActions } from "../redux/modules/user";
+import { apiKey } from "./firebase";
 
 import Header from "../components/Header";
 import PostList from "../pages/PostList";
@@ -13,10 +16,21 @@ import Login from "../pages/Login";
 import { Grid } from "../elements/index";
 
 function App() {
+  const dispatch = useDispatch();
+  const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
+  const is_session = sessionStorage.getItem(_session_key);
+
+  React.useEffect(() => {
+    if (is_session) {
+      console.log("발동!!!!");
+      dispatch(userActions.loginCheckFB());
+    }
+  }, []);
+
   return (
     <React.Fragment>
       <Grid>
-        <ConnectedRouter history={history}>   {/* 이렇게 해줘야지 연결해줘야지 history를 리덕스에서 쓸수 있다. */}
+        <ConnectedRouter history={history}>
           <Header></Header>
           <Route path="/" exact component={PostList} />
           <Route path="/signup" exact component={Signup} />

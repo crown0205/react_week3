@@ -4,16 +4,22 @@ import { Grid, Text, Button } from "../elements/index";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { actionCreators as userActions } from "../redux/modules/user";
+import { apiKey } from "../shared/firebase";
 
 const Header = props => {
   const history = useHistory();
   const dispatch = useDispatch();
   const is_login = useSelector(state => state.user.is_login);
 
-  console.log(useSelector(state => state))
-  // 리덕스에 있는 정보 변경(없애)해줌.
+  console.log(
+    "header : ",
+    useSelector(state => state)
+  );
 
-  if (is_login) {
+  const _session_key = `firebase:authUser:${apiKey}:[DEFAULT]`;
+  const is_session = sessionStorage.getItem(_session_key) ? true : false;
+
+  if (is_login && is_session) {
     return (
       <Grid is_flex padding="4px 16px">
         <Grid>
@@ -40,7 +46,7 @@ const Header = props => {
             fontW="600"
             text="로그아웃"
             _onClick={() => {
-              dispatch(userActions.logOut({}))
+              dispatch(userActions.logOut({}));
               history.push("/login");
             }}
           />
