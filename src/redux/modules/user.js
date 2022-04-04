@@ -34,11 +34,13 @@ const signupFB = (id, pwd, user_name) => {
       .createUserWithEmailAndPassword(id, pwd) // firebase에 id,pwd를 생성.
       .then(user => {
         auth.currentUser
-          .updateProfile({  // 닉네임을 새로 업데이트 시켜줌.
+          .updateProfile({
+            // 닉네임을 새로 업데이트 시켜줌.
             displayName: user_name,
           })
 
-          .then(() => {  // 리덕스에 setUser 유저 생성데이터를 넣어줌.
+          .then(() => {
+            // 리덕스에 setUser 유저 생성데이터를 넣어줌.
             dispatch(
               setUser({ user_name: user_name, id: id, user_profile: "" })
             );
