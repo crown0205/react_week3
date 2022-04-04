@@ -13,7 +13,8 @@ import PostList from "../pages/PostList";
 import Signup from "../pages/Signup";
 import Login from "../pages/Login";
 
-import { Grid } from "../elements/index";
+import Permit from "./Permit";
+import { Grid, Button } from "../elements/index";
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +38,9 @@ function App() {
           <Route path="/login" exact component={Login} />
         </ConnectedRouter>
       </Grid>
+      <Permit>
+        <Button is_float text="+"/>
+      </Permit>
     </React.Fragment>
   );
 }

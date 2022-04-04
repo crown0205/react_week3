@@ -46,7 +46,7 @@ const ButtonBox = styled.button`
   ${props => (props.margin ? `margin: ${props.margin};` : "")}
 `;
 
-const FloatButton = styled.button`
+const FloatButton = styled.button` 
   width: 50px;
   height: 50px;
   background-color: #212121;
@@ -55,12 +55,12 @@ const FloatButton = styled.button`
   font-size: 36px;
   font-weight: 800;
   position: fixed;
-  bottom: 50px;
+  bottom: 30px;
   right: 16px;
   text-align: center;
   vertical-align: middle;
   border: none;
-  border-radius: 50%;
+  border-radius: 50%; 
 `;
 
 export default Button;
