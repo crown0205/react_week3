@@ -1,5 +1,4 @@
 import React from "react";
-import { setCookie } from "../shared/Cookie";
 import { actionCreators as userActions } from "../redux/modules/user";
 
 import { useDispatch } from "react-redux";

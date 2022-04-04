@@ -1,7 +1,27 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { actionCreators as userActions } from "../redux/modules/user";
+
 import { Grid, Text, Input, Button } from "../elements/index";
 
 const Signup = props => {
+  const dispatch = useDispatch();
+
+  const [id, setId] = React.useState("");
+  const [user_name, setUserName] = React.useState("");
+  const [pwd, setPwd] = React.useState("");
+  const [pwd_check, setPwdCheck] = React.useState("");
+
+  const signup = () => {
+    if (id === "" || pwd === "" || user_name === "" || pwd_check === "") {
+      return window.alert("입력을 완료 해주세요");
+    }
+    if (pwd !== pwd_check) {
+      return window.alert("비밀번호가 일치 하지 않습니다.");
+    }
+
+    dispatch(userActions.signupFB(id, pwd, user_name));
+  };
 
   return (
     <React.Fragment>
@@ -14,6 +34,9 @@ const Signup = props => {
           <Input
             label="아이디"
             placeholder="아이디를 입력해주세요."
+            _onChange={e => {
+              setId(e.target.value);
+            }}
           />
         </Grid>
 
@@ -21,6 +44,9 @@ const Signup = props => {
           <Input
             label="닉네임"
             placeholder="닉네임을 입력해주세요."
+            _onChange={e => {
+              setUserName(e.target.value);
+            }}
           />
         </Grid>
 
@@ -29,6 +55,9 @@ const Signup = props => {
             label="비밀번호"
             type="password"
             placeholder="비밀번호를 입력해주세요."
+            _onChange={e => {
+              setPwd(e.target.value);
+            }}
           />
         </Grid>
 
@@ -37,6 +66,9 @@ const Signup = props => {
             label="비밀번호 확인"
             type="password"
             placeholder="비밀번호를 다시 입력해주세요."
+            _onChange={e => {
+              setPwdCheck(e.target.value);
+            }}
           />
         </Grid>
 
@@ -44,10 +76,11 @@ const Signup = props => {
           text="회원가입하기"
           margin="50px 0px"
           padding="24px 0px"
-          ></Button>
+          _onClick={signup}
+        ></Button>
       </Grid>
     </React.Fragment>
-  )
-}
+  );
+};
 
 export default Signup;
